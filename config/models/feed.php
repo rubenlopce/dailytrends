@@ -3,7 +3,6 @@
 class Feed{
 
     public $title;
-    public $openingLine;
     public $body;
     public $image;
     public $source;
@@ -12,10 +11,6 @@ class Feed{
     //Getters
 
     function getTitle(){
-        return $this->title;
-    }
-
-    function getOpeningLine(){
         return $this->title;
     }
 
@@ -39,10 +34,6 @@ class Feed{
 
     function setTitle($title){
         $this->title = $title;
-    }
-
-    function setOpeningLine($openingLine){
-        $this->title = $openingLine;
     }
 
     function setBody($body){
