@@ -23,9 +23,7 @@ $html = file_get_html('https://elpais.com/');
 
 for ($i=0; $i < 5; $i++) { 
 
-    $storyLink = $html->find('.articulo-titulo a',$i);
-
-    $nFeed = webScraping($storyLink,'#articulo-titulo','.articulo-subtitulo','meta[property=og:image]','span[class=autor-nombre] a','El País'); 
+    $nFeed = webScraping(getLinkOfArticle($html,'.articulo-titulo a',$i),'#articulo-titulo','.articulo-subtitulo','meta[property=og:image]','span[class=autor-nombre] a','El País'); 
 
     if (!checkIfFeedExists($nFeed, $arrayStories)) {
         array_push($arrayStories,$nFeed);
@@ -39,9 +37,7 @@ $html = file_get_html('https://www.elmundo.es/');
 
 for ($i=0; $i < 5; $i++) { 
 
-    $storyLink = $html->find('.ue-c-cover-content__link',$i);
-
-    $nFeed = webScraping($storyLink,'.js-headline','.ue-c-article__standfirst','meta[data-ue-u=og:image]','.ue-c-article__byline-name','El Mundo');
+    $nFeed = webScraping(getLinkOfArticle($html,'.ue-c-cover-content__link',$i),'.js-headline','.ue-c-article__standfirst','meta[data-ue-u=og:image]','.ue-c-article__byline-name','El Mundo');
 
     if (!checkIfFeedExists($nFeed, $arrayStories)) {
         array_push($arrayStories,$nFeed);
@@ -58,7 +54,7 @@ function webScraping($html,$titleSelector,$bodySelector,$imageSelector,$publishe
 
     $publisher="";
     
-    $story = file_get_html($html->href);
+    $story = file_get_html($html);
 
     $title = $story->find($titleSelector,0)->plaintext;
     $body = $story->find($bodySelector,0)->plaintext;
@@ -77,7 +73,6 @@ function webScraping($html,$titleSelector,$bodySelector,$imageSelector,$publishe
 }
 
 //Function to check if the the article exists in the Feed to avoid duplicates 
-
 function checkIfFeedExists($object,$array){
 
     foreach ($array as $item) {
@@ -89,6 +84,20 @@ function checkIfFeedExists($object,$array){
     }
 
     return false;
+
+}
+
+//Function to get the link of the article
+function getLinkOfArticle($html,$selector,$nArticle){
+
+    $storyLink = $html->find($selector,$nArticle)->href;
+
+    //Avoid problems with urls starting with double slash
+    if(substr( $storyLink, 0, 2 )=='//'){
+        $storyLink = 'https:'.$storyLink;
+    }
+
+    return $storyLink;
 
 }
 
