@@ -4,8 +4,8 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-require_once '../libs/simple_html_dom.php';
-require_once 'models/feed.php';
+require_once 'libs/simple_html_dom.php';
+require_once 'config/models/feed.php';
 
 session_start();
 
@@ -27,9 +27,7 @@ for ($i=0; $i < 5; $i++) {
 
     $nFeed = webScraping($storyLink,'#articulo-titulo','.articulo-subtitulo','meta[property=og:image]','span[class=autor-nombre] a','El País'); 
 
-    if (checkIfFeedExists($nFeed, $arrayStories)) {
-        echo "El artículo ya existe en el Feed<br/><br/>";
-    } else {
+    if (!checkIfFeedExists($nFeed, $arrayStories)) {
         array_push($arrayStories,$nFeed);
     }
 
@@ -45,17 +43,13 @@ for ($i=0; $i < 5; $i++) {
 
     $nFeed = webScraping($storyLink,'.js-headline','.ue-c-article__standfirst','meta[data-ue-u=og:image]','.ue-c-article__byline-name','El Mundo');
 
-    if (checkIfFeedExists($nFeed, $arrayStories)) {
-        echo "El artículo ya existe en el Feed<br/><br/>";
-    } else {
+    if (!checkIfFeedExists($nFeed, $arrayStories)) {
         array_push($arrayStories,$nFeed);
     }
 
 }
 
 $_SESSION['feed']=$arrayStories;
-
-echo json_encode($_SESSION['feed']);
 
 //Function for web scraping
 function webScraping($html,$titleSelector,$bodySelector,$imageSelector,$publisherSelector,$source){
