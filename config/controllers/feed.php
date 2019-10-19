@@ -18,6 +18,16 @@
 
         }
 
+        public function showAll($feedArray){
+
+            foreach ($feedArray as $key => $feed) {
+                
+                require 'config/views/feed/list.php';
+            
+            }
+
+        }
+
     }
 
 ?>
