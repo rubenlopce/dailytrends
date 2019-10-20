@@ -24,7 +24,7 @@
 
         public function deleteFeed($position,$feedArray){
 
-            array_splice($feedArray,1,$position);
+            $feedArray = array_splice($feedArray,1,$position);
 
             return $feedArray;
 
