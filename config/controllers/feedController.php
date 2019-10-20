@@ -2,7 +2,17 @@
 
     class feedController{
 
-        public function createFeed(){
+        public function createFeed($title,$image,$publisher,$body,$source){
+
+            $nFeed = new Feed();
+
+            $nFeed->setTitle($title);
+            $nFeed->setImage($image);
+            $nFeed->setPublisher($publisher);
+            $nFeed->setBody($body);
+            $nFeed->setSource($source);
+
+            return $nFeed;
 
         }
 
