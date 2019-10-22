@@ -42,6 +42,8 @@
 
         public function showAll($feedArray){
 
+            $feedArray = array_reverse($feedArray, true); 
+
             foreach ($feedArray as $key => $feed) {
                 
                 require DIR_VIEWS.'feed/list.php';
