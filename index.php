@@ -51,15 +51,9 @@
 
     <script>
 
-        function fillJSArray(){
-            console.log(<?=json_encode($_SESSION['feed'])?>);
-            return feed_array = <?=json_encode($_SESSION['feed'])?>
-        }
-
-        var feed_array = fillJSArray();
+        feed_array = <?=json_encode($_SESSION['feed'])?>
         
     </script>
-    <script src="app/assets/js/feed.js"></script>
     <script src="app/assets/js/script.js"></script>
 
    </body>

@@ -44,16 +44,46 @@ for (var i = 0; i<closeModalButtons.length; i++){
     };
 };
 
+// Form validations
+
+function validateform(title,image,publisher,body,source,form){  
+
+    if(form=="CREATE"){
+        for (let index = 0; index < feed_array.length; index++) {
+            var element = feed_array[index].title;
+            if(element.trim().toLowerCase()==title.trim().toLowerCase()){
+                alert('El artículo ya existe en el feed.');
+                return false;
+            }
+        }
+    };
+    if (title==null || title==""){  
+        alert("El campo titular está vacío.");  
+        return false;  
+    }else if(publisher==null || publisher==""){
+        alert("El campo autores está vacío.");  
+        return false;  
+    }else if(source==null || source==""){
+        alert("El campo fuente está vacío.");  
+        return false;  
+    }
+
+    return true;
+
+}
+
 // Ajax request to create
 var createButton = document.getElementById('feed-create-button');
 
 createButton.onclick = function(){
 
-    var title = document.getElementById('title-create').value;
-    var image = document.getElementById('image-create').value;
-    var publisher = document.getElementById('publisher-create').value;
-    var body = document.getElementById('body-create').value
-    var source = document.getElementById('source-create').value;
+    var title = document.getElementById('title-create').value.trim();
+    var image = document.getElementById('image-create').value.trim();
+    var publisher = document.getElementById('publisher-create').value.trim();
+    var body = document.getElementById('body-create').value.trim();
+    var source = document.getElementById('source-create').value.trim();
+
+    if(validateform(title, image, publisher, body, source, "CREATE")){
 
     var http = new XMLHttpRequest();
     var url = 'config/views/feed/create.php';
@@ -64,12 +94,11 @@ createButton.onclick = function(){
     '&source='+source;
     http.open('POST', url, true);
 
-    //Send the proper header information along with the request
     http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
     http.send(params);
 
-    http.onreadystatechange = function() {//Call a function when the state changes.
+    http.onreadystatechange = function() {
         
 
         if(http.readyState == 4 && http.status == 200) {
@@ -99,6 +128,8 @@ createButton.onclick = function(){
 
         }
     }
+
+}
     
 };
 
@@ -107,12 +138,14 @@ var editButton = document.getElementById('button-edit');
 
 editButton.onclick = function(){
 
-    var position = document.getElementById('posFeed-edit').value;
-    var title = document.getElementById('title-edit').value;
-    var image = document.getElementById('image-edit').value;
-    var publisher = document.getElementById('publisher-edit').value;
-    var body = document.getElementById('body-edit').value;
-    var source = document.getElementById('source-edit').value;
+    var position = document.getElementById('posFeed-edit').value.trim();
+    var title = document.getElementById('title-edit').value.trim();
+    var image = document.getElementById('image-edit').value.trim();
+    var publisher = document.getElementById('publisher-edit').value.trim();
+    var body = document.getElementById('body-edit').value.trim();
+    var source = document.getElementById('source-edit').value.trim();
+
+    if(validateform(title, image, publisher, body, source, "EDIT")){
 
     var http = new XMLHttpRequest();
     var url = 'config/views/feed/update.php';
@@ -124,10 +157,9 @@ editButton.onclick = function(){
     '&source='+source+'';
     http.open('POST', url, true);
 
-    //Send the proper header information along with the request
     http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
-    http.onreadystatechange = function() {//Call a function when the state changes.
+    http.onreadystatechange = function() {
         if(http.readyState == 4 && http.status == 200) {
 
             //Update feed on the current list
@@ -155,6 +187,8 @@ editButton.onclick = function(){
 
     http.send(params);
 
+}
+
 };
 
 // Ajax request to delete
@@ -170,10 +204,9 @@ deleteButton.onclick = function(){
 
     http.open('POST', url, true);
 
-    //Send the proper header information along with the request
     http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
-    http.onreadystatechange = function() {//Call a function when the state changes.
+    http.onreadystatechange = function() {
         if(http.readyState == 4 && http.status == 200) {
 
             //Delete feed from the current list
