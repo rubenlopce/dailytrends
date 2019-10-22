@@ -2,10 +2,38 @@ var createButton = document.getElementById('button-create');
 var closeModalButtons = document.getElementsByClassName('modal__modal-content__header__close-modal');
 var modals = document.getElementsByClassName('modal');
 
+//Open modal to create feed
 createButton.onclick = function(){
     document.getElementById('modal-create').style.display='block';
 };
 
+//Open modal to edit or delete feed
+var detailsButtons = document.getElementsByClassName('feedContainer__box__body__info__details');
+
+function addClickDetails(detailsButtons){
+
+    for (var i = 0; i<detailsButtons.length; i++){
+        detailsButtons[i].onclick = function() {
+    
+            document.getElementById('modal-details').style.display='block';
+    
+            document.getElementById('posFeed-edit').value=this.value;
+            document.getElementById('posFeedDelete').value=this.value;
+    
+            document.getElementById('title-edit').value=feed_array[this.value].title;
+            document.getElementById('image-edit').value=feed_array[this.value].image;
+            document.getElementById('publisher-edit').value=feed_array[this.value].publisher;
+            document.getElementById('body-edit').value=feed_array[this.value].body;
+            document.getElementById('source-edit').value=feed_array[this.value].source;
+            
+        };
+    };
+
+}
+
+addClickDetails(detailsButtons);
+
+//Close modals
 for (var i = 0; i<closeModalButtons.length; i++){
     closeModalButtons[i].onclick = function(){
 
@@ -61,28 +89,14 @@ createButton.onclick = function(){
             };
 
             var newFeedDetailsButton = document.getElementsByClassName('feedContainer__box__body__info__details')[0];
-
             // Insert the object in the array with its position
             feed_array.splice(newFeedDetailsButton.value,0,newFeedObject);
 
-            // Add functionality to details button
-            newFeedDetailsButton.onclick = function(){
+            var detailsButton = document.getElementsByClassName('feedContainer__box__body__info__details');
+            addClickDetails(detailsButton);
 
-                console.log(this.value);
+            document.getElementById('modal-create').style.display='none';
 
-                document.getElementById('modal-details').style.display='block';
-
-                document.getElementById('posFeed-edit').value=this.value;
-                document.getElementById('posFeedDelete').value=this.value;
-
-                document.getElementById('title-edit').value=feed_array[this.value].title;
-                document.getElementById('image-edit').value=feed_array[this.value].image;
-                document.getElementById('publisher-edit').value=feed_array[this.value].publisher;
-                document.getElementById('body-edit').value=feed_array[this.value].body;
-                document.getElementById('source-edit').value=feed_array[this.value].source;
-
-            };
-            
         }
     }
     
@@ -121,7 +135,7 @@ editButton.onclick = function(){
             var feedContainer = document.getElementById('feedContainer__box__'+position+'');
 
             feedContainer.getElementsByClassName('feedContainer__box__body__title')[0].getElementsByTagName('h3')[0].innerHTML=title;
-            feedContainer.getElementsByClassName('feedContainer__box__img')[0].style.backgroundImage="url('"+image+"')";
+            feedContainer.getElementsByClassName('feedContainer__box__img')[0].style.backgroundImage="url("+image+")";
             feedContainer.getElementsByClassName('feedContainer__box__body__title_publisher')[0].innerHTML=publisher;
             feedContainer.getElementsByClassName('feedContainer__box__body__description')[0].getElementsByTagName('p')[0].innerHTML=body;
             feedContainer.getElementsByClassName('feedContainer__box__body__description')[0].getElementsByTagName('small')[0].innerHTML=source;
@@ -134,6 +148,8 @@ editButton.onclick = function(){
             feed_array[position].body=body;
             feed_array[position].source=source;
             
+            document.getElementById('modal-details').style.display='none';
+
         }
     }
 
@@ -165,6 +181,8 @@ deleteButton.onclick = function(){
             var feedContainer = document.getElementById('feedContainer__box__'+position+'');
 
             feedContainer.remove();
+
+            document.getElementById('modal-details').style.display='none';
             
         }
     }
