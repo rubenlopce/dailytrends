@@ -1,0 +1,106 @@
+.container-fluid {
+
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 0;
+    padding-right: 0;
+    
+}
+
+#button-create{
+    
+    background: rgba(155, 155, 255, 0.35);
+    background-image: url('../img/create.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 75%;
+    border-radius:50px;
+    bottom:40px;
+    box-shadow: 2px 4px 5px rgba(0, 0, 0, 0.35);
+    height: 75px;
+    position: fixed;
+    right:40px;
+    transition: all 0.5s;
+    width: 75px;
+
+    &:hover{
+
+        background: rgba(155, 155, 255, 1);
+        background-image: url('../img/create.png');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: 75%;
+        bottom:37.5px;
+        height: 80px;
+        right:37.5px;
+        transition: all 0.5s;
+        width: 80px;
+
+    }
+    
+}
+
+
+.feedContainer{ 
+
+    margin: 20px auto;
+    max-width: 1200px;
+   
+    &::after { 
+
+        content: "";
+        clear: both;
+        display: block; 
+
+     }
+
+    .feedContainer__box{
+
+            border-radius: 5px;
+            box-shadow: 2px 4px 5px rgba(0, 0, 0, 0.35);
+            display: flex;
+            flex-direction: column;
+            float: left;
+            margin: 1.5%;
+            width: 30%;            
+    
+        .feedContainer__box__img {
+
+            background-size: cover!important;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+            height: 217px;
+            width: 100%;
+
+        }
+        .feedContainer__box__body {
+
+            background: #fbfbfb;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            min-height: 350px;
+            padding: 13px 20px;
+
+            .feedContainer__box__body__title{
+                h3{
+
+                    font-size: 1.2em; 
+
+                }
+            }
+        }
+        .feedContainer__box__body__info {
+
+            margin-top: auto;
+
+            button{
+
+                width:100%;
+
+            }
+        }
+
+    }
+
+}

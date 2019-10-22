@@ -1,7 +1,9 @@
-var detailsButtons = document.getElementsByClassName('details');
+var detailsButtons = document.getElementsByClassName('feedContainer__box__body__info__details');
 
 for (var i = 0; i<detailsButtons.length; i++){
     detailsButtons[i].onclick = function() {
+
+        document.getElementById('modal-details').style.display='block';
 
         document.getElementById('posFeed').value=this.value;
         document.getElementById('posFeedDelete').value=this.value;
