@@ -10,7 +10,6 @@
 
     session_start();
 
-    $position = $_POST['posFeed'];
     $title = $_POST['title'];
     $image = $_POST['image'];
     $publisher = $_POST['publisher'];
@@ -19,10 +18,10 @@
 
     $feedController=new feedController();
 
-    $nFeed = $feedController->createFeed($title,$image,$publisher,$body,$source,$position,$_SESSION['feed']);
+    $nFeed = $feedController->createFeed($title,$image,$publisher,$body,$source);
 
     array_push($_SESSION['feed'],$nFeed); 
 
-    header('Location:../../../index.php');
+    $feedController->showFeed($nFeed,sizeof($_SESSION['feed'])-1);
 
 ?>

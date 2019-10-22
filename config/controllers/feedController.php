@@ -16,7 +16,11 @@
 
         }
 
-        public function showFeed(){
+        public function showFeed($feed,$position){
+
+            $key = $position;
+
+            require DIR_VIEWS.'feed/list.php';
 
         }
 

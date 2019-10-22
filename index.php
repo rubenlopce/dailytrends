@@ -1,8 +1,14 @@
 <?php 
 
+    ini_set('display_errors', 0);
+    ini_set('display_startup_errors', 0);
+    error_reporting(E_ALL);
+
     require_once 'config/config.php';
     require_once DIR_CTLS.'feedController.php';
     require_once 'app/widgets/readFeeds.php';
+
+    $feedController=new feedController();
 
 ?>
 
@@ -24,8 +30,6 @@
     
         <?php
 
-            $feedController=new feedController();
-
             $feedController->showAll($_SESSION['feed']);
 
         ?>
@@ -46,7 +50,14 @@
     <div id='button-create'></div>
 
     <script>
-        var feed_array = <?=json_encode($_SESSION['feed'])?>
+
+        function fillJSArray(){
+            console.log(<?=json_encode($_SESSION['feed'])?>);
+            return feed_array = <?=json_encode($_SESSION['feed'])?>
+        }
+
+        var feed_array = fillJSArray();
+        
     </script>
     <script src="app/assets/js/feed.js"></script>
     <script src="app/assets/js/script.js"></script>

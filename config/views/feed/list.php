@@ -1,4 +1,4 @@
-<article class='feedContainer__box'>
+<article class='feedContainer__box' id='feedContainer__box__<?= $key ?>'>
 
     <div class="feedContainer__box__img" style="background:url(<?=$feed->getImage();?>);"></div>
     

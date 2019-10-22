@@ -23,6 +23,4 @@
 
     $_SESSION['feed']=$feedArray;
 
-    header('Location:../../../index.php');
-
 ?>
