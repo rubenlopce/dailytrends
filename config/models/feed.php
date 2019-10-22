@@ -7,6 +7,7 @@ class Feed{
     public $image;
     public $source;
     public $publisher;
+    public $linkfeed;
 
     //Getters
 
@@ -30,6 +31,10 @@ class Feed{
         return $this->publisher;
     }
 
+    function getLinkfeed(){
+        return $this->linkfeed;
+    }
+
     //Setters
 
     function setTitle($title){
@@ -50,6 +55,10 @@ class Feed{
 
     function setPublisher($publisher){
         $this->publisher = $publisher;
+    }
+
+    function setLinkfeed($linkfeed){
+        $this->linkfeed = $linkfeed;
     }
 
 }
