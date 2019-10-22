@@ -6,11 +6,13 @@ require_once 'config/models/feed.php';
 session_start();
 
 // Check if there is already a feed created
-
+//ArrayHistory is used to avoid show deleted feeds again
 if(isset($_SESSION['feed'])){
     $arrayStories = $_SESSION['feed'];
+    $arrayHistory = $_SESSION['history'];
 }else{
     $arrayStories = array();
+    $arrayHistory = array();
 }
 
 // Feed of "El Pais"
@@ -21,8 +23,9 @@ for ($i=0; $i < 5; $i++) {
 
     $nFeed = webScraping(getLinkOfArticle($html,'.articulo-titulo a',$i),'#articulo-titulo','.articulo-subtitulo','meta[property=og:image]','span[class=autor-nombre] a','El País'); 
 
-    if (!checkIfFeedExists($nFeed, $arrayStories)) {
+    if (!checkIfFeedExists($nFeed, $arrayStories) && !checkIfFeedExists($nFeed, $arrayHistory)) {
         array_push($arrayStories,$nFeed);
+        array_push($arrayHistory,$nFeed);
     }
 
 }
@@ -35,13 +38,15 @@ for ($i=0; $i < 5; $i++) {
 
     $nFeed = webScraping(getLinkOfArticle($html,'.ue-c-cover-content__link',$i),'.js-headline','.ue-c-article__standfirst','meta[data-ue-u=og:image]','.ue-c-article__byline-name','El Mundo');
 
-    if (!checkIfFeedExists($nFeed, $arrayStories)) {
+    if (!checkIfFeedExists($nFeed, $arrayStories) && !checkIfFeedExists($nFeed, $arrayHistory)) {
         array_push($arrayStories,$nFeed);
+        array_push($arrayHistory,$nFeed);
     }
 
 }
 
 $_SESSION['feed']=$arrayStories;
+$_SESSION['history']=$arrayHistory;
 
 //Function for web scraping
 function webScraping($html,$titleSelector,$bodySelector,$imageSelector,$publisherSelector,$source){
@@ -72,15 +77,11 @@ function webScraping($html,$titleSelector,$bodySelector,$imageSelector,$publishe
 function checkIfFeedExists($object,$array){
 
     foreach ($array as $item) {
-
-        if($object->getTitle() == $item->getTitle()){
+        if($object->getTitle()==$item->getTitle()){
             return true;
         }
-        
-    }
-
+    };
     return false;
-
 }
 
 //Function to get the link of the article
