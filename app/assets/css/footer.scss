@@ -1,0 +1,45 @@
+footer{
+    
+    background: #0c0326;
+    color: white;
+    height: 100px;
+    padding: 25px 0px;
+    text-align: center;
+    width: 100%;
+    
+    .container-fluid {
+
+        margin: 0 auto;
+        width: 768px;
+
+        #social-media{
+
+            height: 30px;
+            width: 100%;
+
+            .social-media__button{
+
+                background-size: cover!important;
+                border: 2px solid red;
+                display: inline-block;
+                height: 25px;
+                margin: 5px;
+                width: 25px;
+
+            }
+
+            #social-media__facebook{
+                background-image: url('../img/footer/facebook-glyph.png');
+            }
+            #social-media__twitter{
+                background-image: url('../img/footer/twitter-glyph.png');
+            }
+
+            #social-media__instagram{
+                background-image: url('../img/footer/instagram-glyph.png');
+            }
+
+        }
+
+    }
+} 

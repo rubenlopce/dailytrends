@@ -1,0 +1,38 @@
+body{
+
+    margin: 0%;
+
+}
+
+section#header{
+    
+    background: url(../img/header/header.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+    background-position-y: -765px;
+    height: 150px;
+    width: 100%;
+
+    div.opacity{
+
+        background:  rgba(12, 3, 38, 0.5);
+        height: 100%;
+        width: 100%;
+    
+        .header_up {
+
+            margin: 0 auto;
+            padding: 10px 0px;
+
+            h1,p{
+    
+                color: white;
+                text-align: center;
+                vertical-align: middle;
+        
+            }
+        }
+    
+    }
+    
+}
