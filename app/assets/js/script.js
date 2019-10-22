@@ -5,6 +5,13 @@ var modals = document.getElementsByClassName('modal');
 //Open modal to create feed
 createButton.onclick = function(){
     document.getElementById('modal-create').style.display='block';
+
+    document.getElementById('title-create').value="";
+    document.getElementById('image-create').value="";
+    document.getElementById('publisher-create').value="";
+    document.getElementById('body-create').value="";
+    document.getElementById('source-create').value="";
+    document.getElementById('linkfeed-create').value="";
 };
 
 //Open modal to edit or delete feed
@@ -25,6 +32,7 @@ function addClickDetails(detailsButtons){
             document.getElementById('publisher-edit').value=feed_array[this.value].publisher;
             document.getElementById('body-edit').value=feed_array[this.value].body;
             document.getElementById('source-edit').value=feed_array[this.value].source;
+            document.getElementById('linkfeed-edit').value=feed_array[this.value].linkfeed;
             
         };
     };
@@ -82,6 +90,7 @@ createButton.onclick = function(){
     var publisher = document.getElementById('publisher-create').value.trim();
     var body = document.getElementById('body-create').value.trim();
     var source = document.getElementById('source-create').value.trim();
+    var linkfeed = document.getElementById('linkfeed-create').value.trim();
 
     if(validateform(title, image, publisher, body, source, "CREATE")){
 
@@ -91,7 +100,8 @@ createButton.onclick = function(){
     '&image='+image+
     '&publisher='+publisher+
     '&body='+body+
-    '&source='+source;
+    '&source='+source+
+    '&linkfeed='+linkfeed+'';
     http.open('POST', url, true);
 
     http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -114,7 +124,8 @@ createButton.onclick = function(){
                 image: image,
                 publisher: publisher,
                 body: body,
-                source: source
+                source: source,
+                linkfeed: linkfeed
             };
 
             var newFeedDetailsButton = document.getElementsByClassName('feedContainer__box__body__info__details')[0];
@@ -144,6 +155,7 @@ editButton.onclick = function(){
     var publisher = document.getElementById('publisher-edit').value.trim();
     var body = document.getElementById('body-edit').value.trim();
     var source = document.getElementById('source-edit').value.trim();
+    var linkfeed = document.getElementById('linkfeed-edit').value.trim();
 
     if(validateform(title, image, publisher, body, source, "EDIT")){
 
@@ -154,7 +166,8 @@ editButton.onclick = function(){
     '&image='+image+
     '&publisher='+publisher+
     '&body='+body+
-    '&source='+source+'';
+    '&source='+source+
+    '&linkfeed='+linkfeed+'';
     http.open('POST', url, true);
 
     http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -171,6 +184,7 @@ editButton.onclick = function(){
             feedContainer.getElementsByClassName('feedContainer__box__body__title_publisher')[0].innerHTML=publisher;
             feedContainer.getElementsByClassName('feedContainer__box__body__description')[0].getElementsByTagName('p')[0].innerHTML=body;
             feedContainer.getElementsByClassName('feedContainer__box__body__description')[0].getElementsByTagName('small')[0].innerHTML=source;
+            feedContainer.getElementsByClassName('feedContainer__box__body__description')[0].getElementsByTagName('small')[0].innerHTML+=" | <a href='"+linkfeed+"' target='_blank'>Leer más...</a>";
 
 
             // Insert the object in the array with its position

@@ -15,10 +15,11 @@
     $publisher = $_POST['publisher'];
     $body = $_POST['body'];
     $source = $_POST['source'];
+    $linkfeed = $_POST['linkfeed'];
 
     $feedController=new feedController();
 
-    $nFeed = $feedController->createFeed($title,$image,$publisher,$body,$source);
+    $nFeed = $feedController->createFeed($title,$image,$publisher,$body,$source,$linkfeed);
 
     // Check if image url is valid
     if(filter_var($nFeed->getImage(), FILTER_VALIDATE_URL)){
@@ -28,7 +29,7 @@
         if(!stripos($headers[0],"200 OK")?true:false){
 
             $nFeed->setImage('app/assets/img/default_feed.png');
-            
+
         }
 
     }else{

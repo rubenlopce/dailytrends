@@ -2,7 +2,7 @@
 
     class feedController{
 
-        public function createFeed($title,$image,$publisher,$body,$source){
+        public function createFeed($title,$image,$publisher,$body,$source,$linkfeed){
 
             $nFeed = new Feed();
 
@@ -11,6 +11,7 @@
             $nFeed->setPublisher($publisher);
             $nFeed->setBody($body);
             $nFeed->setSource($source);
+            $nFeed->setLinkfeed($linkfeed);
 
             return $nFeed;
 
@@ -24,13 +25,14 @@
 
         }
 
-        public function updateFeed($title,$image,$publisher,$body,$source,$position,$feedArray){
+        public function updateFeed($title,$image,$publisher,$body,$source,$linkfeed,$position,$feedArray){
 
             $feedArray[$position]->setTitle($title);
             $feedArray[$position]->setImage($image);
             $feedArray[$position]->setPublisher($publisher);
             $feedArray[$position]->setBody($body);
             $feedArray[$position]->setSource($source);
+            $feedArray[$position]->setLinkfeed($linkfeed);
 
             return $feedArray;
 

@@ -15,7 +15,7 @@
         <div class="feedContainer__box__body__description">
 
             <p><?=$feed->getBody();?></p>
-            <small><?=$feed->getSource();?></small>
+            <small><?=$feed->getSource();?> | <a href='<?=$feed->getLinkfeed();?>' target='_blank'>Leer más...</a></small>
             
         </div>
 

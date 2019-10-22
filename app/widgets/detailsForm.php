@@ -15,17 +15,17 @@
 
                 <div>
                     <label for="title">Titular</label>
-                    <input type="text" name="title" id="title-edit" required>
+                    <input type="text" name="title" id="title-edit">
                 </div>
 
                 <div>
-                    <label for="image">Imagen</label>
-                    <input type="text" name="image" id="image-edit" required>
+                    <label for="image">Enlace de la imagen</label>
+                    <input type="text" name="image" id="image-edit">
                 </div>
 
                 <div>
                     <label for="publisher">Autor</label>
-                    <input type="text" name="publisher" id="publisher-edit" required>
+                    <input type="text" name="publisher" id="publisher-edit">
                 </div>
 
                 <div>
@@ -35,7 +35,12 @@
 
                 <div>
                     <label for="source">Fuente</label>
-                    <input type="text" name="source" id="source-edit" required>
+                    <input type="text" name="source" id="source-edit">
+                </div>
+
+                <div>
+                    <label for="linkfeed">Enlace</label>
+                    <input type="text" name="linkfeed" id="linkfeed-edit">
                 </div>
 
                 <button type='button' id='button-edit'>Editar</button>

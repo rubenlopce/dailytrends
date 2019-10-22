@@ -61,7 +61,7 @@ function webScraping($html,$titleSelector,$bodySelector,$imageSelector,$publishe
     $body = $story->find($bodySelector,0)->plaintext;
     $image = $story->find($imageSelector,0)->content;
     foreach($story->find($publisherSelector) as $author){
-        $publisher .= $author->plaintext." ";
+        $publisher .= $author->plaintext.". ";
     };
 
     $feed->setTitle($title);
@@ -69,6 +69,7 @@ function webScraping($html,$titleSelector,$bodySelector,$imageSelector,$publishe
     $feed->setImage($image);
     $feed->setPublisher($publisher);
     $feed->setSource($source);
+    $feed->setLinkfeed($html);
 
     return $feed;
 }
